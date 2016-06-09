@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SwipeRefreshLayout</string>
+    <string name="pull_to_random">下拉刷新以产生一个1~100之间的随机数：</string>
+</resources>
