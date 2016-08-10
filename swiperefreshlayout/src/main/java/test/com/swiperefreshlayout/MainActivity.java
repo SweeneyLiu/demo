@@ -35,6 +35,6 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
                 int i = (int)(Math.random()*100+1);
                 mRandomTextView.setText(String.valueOf(i));
             }
-        }, 3000);
+        }, 3000);//延迟3秒
     }
 }
