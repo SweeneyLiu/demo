@@ -1,12 +1,13 @@
 package jni.reader.video.qiyi.com.swiperefreshlayoutdemo;
 
+import android.app.Activity;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView textView;

@@ -1,1 +1,1 @@
-include ':app', ':swiperefreshlayoutdemo'
+include ':app', ':swiperefreshlayoutdemo', ':viewpagerdemo'
