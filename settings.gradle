@@ -1,1 +1,1 @@
-include ':app', ':swiperefreshlayoutdemo', ':viewpagerdemo'
+include ':app', ':swiperefreshlayoutdemo', ':viewpagerdemo', ':viewfiddlergesturedetectordemo'
