@@ -9,7 +9,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import jni.reader.video.qiyi.com.viewpagerdemo.R;
 
 public class MainActivity extends Activity {
 
