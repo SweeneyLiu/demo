@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/add"
+        android:orderInCategory="1"
+        android:title="添加"
+        android:icon="@drawable/ic_menu_add"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/delete"
+        android:orderInCategory="2"
+        android:title="删除"
+        android:icon="@drawable/ic_menu_delete"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/listview"
+        android:orderInCategory="100"
+        android:title="listview"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/gridview"
+        android:orderInCategory="100"
+        android:title="gridview"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/hor_gridview"
+        android:orderInCategory="100"
+        android:title="HorizontalGridView"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/staggered"
+        android:orderInCategory="100"
+        android:title="staggered"
+        app:showAsAction="never" />
+
+
+</menu>

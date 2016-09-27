@@ -15,10 +15,11 @@ import test.com.demo.R;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DemoViewHolder>{
 
-    private ArrayList<String> mArrayList;
+    protected ArrayList<String> mDataList;
+    private OnItemClickListener mOnItemClickListener;
 
     public RecyclerViewAdapter(ArrayList<String> arrayList) {
-        this.mArrayList = arrayList;
+        this.mDataList = arrayList;
     }
 
     @Override
@@ -30,12 +31,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(DemoViewHolder holder, int position) {
-        holder.mTextView.setText(mArrayList.get(position));
+        holder.mTextView.setText(mDataList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mArrayList.size();
+        return mDataList.size();
     }
 
     public static class DemoViewHolder extends RecyclerView.ViewHolder{
@@ -46,4 +47,65 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mTextView = (TextView) itemView.findViewById(R.id.tv);
         }
     }
+
+
+    /**
+     * 点击事件的接口
+     */
+    public interface  OnItemClickListener{
+        void onItemClickListener(View view,int position);//点击
+        void onItemLongClickListener(View view,int position);//长按
+    }
+
+
+    /**
+     * 增加一行
+     * @param position
+     */
+    public void add(int position){
+        mDataList.add(position,"添加一项");
+        notifyItemInserted(position);
+    }
+
+    /**
+     * 删除一行
+     * @param position
+     */
+    public void delete(int position){
+        mDataList.remove(position);
+        notifyItemRemoved(position);
+        if(position != mDataList.size()){ // 如果移除的是最后一个，忽略
+            notifyItemRangeChanged(position, mDataList.size() - position);
+        }
+    }
+
+    public void setmOnItemClickListener(OnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+    /**
+     * 实现瀑布流布局中的相关事件
+     * @param holder
+     */
+    protected void setUpItemEvent(final DemoViewHolder holder) {
+        if (mOnItemClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int layoutPosition=holder.getLayoutPosition();
+                    mOnItemClickListener.onItemClickListener(holder.itemView,layoutPosition);
+                }
+
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int layoutPosition=holder.getLayoutPosition();
+                    mOnItemClickListener.onItemLongClickListener(holder.itemView,layoutPosition);
+                    return false;
+                }
+            });
+        }
+    }
+
 }

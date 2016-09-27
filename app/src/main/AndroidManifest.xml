@@ -20,6 +20,10 @@
 
         </activity>
 
+        <activity android:name=".activity.StaggeredGridViewLayoutActivity">
+
+        </activity>
+
 
     </application>
 
