@@ -10,36 +10,56 @@ import test.com.demo.R;
 
 public class MainActivity extends BaseActivity {
 
-    private Button mButton;
+    private Button mRecyclerViewButton;
+    private Button mSwipeRefreshLayoutButton;
+    private Button mViewPagerButton;
+    private Button mViewFlipperButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initDatas();
         initViews();
-        mButton.setOnClickListener(new View.OnClickListener() {
+        mRecyclerViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
                 startActivity(intent);
             }
         });
-    }
 
-    @Override
-    protected void initVariables() {
+        mSwipeRefreshLayoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SwipeRefreshLayoutActivity.class);
+                startActivity(intent);
+            }
+        });
 
-    }
+        mViewPagerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ViewPagerActivity.class);
+                startActivity(intent);
+            }
+        });
 
-    @Override
-    protected void initDatas() {
+        mViewFlipperButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ViewFlipperActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
     @Override
     protected void initViews() {
-        mButton = (Button)findViewById(R.id.button);
+        mRecyclerViewButton = (Button)findViewById(R.id.recyclerview_button);
+        mSwipeRefreshLayoutButton = (Button)findViewById(R.id.swiperefreshlayout_button);
+        mViewPagerButton = (Button)findViewById(R.id.viewpager_button);
+        mViewFlipperButton = (Button)findViewById(R.id.viewflipper_button);
     }
 
 }

@@ -1,37 +1,39 @@
-package test.com.viewfiddlergesturedetectordemo;
+package test.com.demo.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.*;
 import android.view.animation.AnimationUtils;
 import android.widget.ViewFlipper;
 
-public class MainActivity extends Activity implements OnTouchListener {
+import test.com.demo.R;
 
-    private ViewFlipper viewFlipper;
-    private GestureDetector gestureDetector;
+/**
+ * Created by liushuwei on 2016/9/27.
+ */
+public class ViewFlipperActivity extends BaseActivity implements View.OnTouchListener {
+
+    private ViewFlipper mViewFlipper;
+    private GestureDetector mGestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView();
-        viewFlipper.setOnTouchListener(this);
-        gestureDetector = new GestureDetector(this,new MySimpleOnGestureListener());
-
-
+        setContentView(R.layout.activity_viewflipper);
+        initViews();
+        mViewFlipper.setOnTouchListener(this);
+        mGestureDetector = new GestureDetector(this,new MySimpleOnGestureListener());
     }
 
-    private void initView() {
-        viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
+    @Override
+    protected void initViews() {
+        mViewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        gestureDetector.onTouchEvent(event);
+        mGestureDetector.onTouchEvent(event);
         return true;
     }
 
@@ -62,21 +64,21 @@ public class MainActivity extends Activity implements OnTouchListener {
             // 从左往右，切换到上一个View
             if (e2.getX() - e1.getX() > 50) {
                 // 设置切换时的动画
-                viewFlipper.setInAnimation(AnimationUtils.loadAnimation(MainActivity.this,
+                mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(ViewFlipperActivity.this,
                         R.anim.push_right_in));
-                viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(MainActivity.this,
+                mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(ViewFlipperActivity.this,
                         R.anim.push_right_out));
                 // 显示上一个View
-                viewFlipper.showPrevious();
+                mViewFlipper.showPrevious();
                 // 从右往左，切换到下一个View
             } else if (e1.getX() - e2.getX() > 50) {
                 // 设置切换时的动画
-                viewFlipper.setInAnimation(AnimationUtils.loadAnimation(MainActivity.this,
+                mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(ViewFlipperActivity.this,
                         R.anim.push_left_in));
-                viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(MainActivity.this,
+                mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(ViewFlipperActivity.this,
                         R.anim.push_left_out));
                 // 显示下一个View
-                viewFlipper.showNext();
+                mViewFlipper.showNext();
             }
             return true;
         }
@@ -111,4 +113,5 @@ public class MainActivity extends Activity implements OnTouchListener {
             return super.onContextClick(e);
         }
     }
+
 }

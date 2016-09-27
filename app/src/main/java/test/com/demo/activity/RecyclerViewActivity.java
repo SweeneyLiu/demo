@@ -60,12 +60,17 @@ public class RecyclerViewActivity extends BaseActivity{
         });
     }
 
-    @Override
-    protected void initVariables() {
+    private void initVariables() {
         mLinearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mGridLayoutManager = new GridLayoutManager(this,2);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.HORIZONTAL);
         mRecyclerViewAdapter = new RecyclerViewAdapter(mArrayList);
+    }
+
+    private void initDatas() {
+        for(int i ='A';i<='Z';i++){
+            mArrayList.add((char)i+"");
+        }
     }
 
     @Override
@@ -73,12 +78,7 @@ public class RecyclerViewActivity extends BaseActivity{
         mRecyclerView = (RecyclerView)findViewById(R.id.rv);
     }
 
-    @Override
-    protected void initDatas() {
-        for(int i ='A';i<='Z';i++){
-            mArrayList.add((char)i+"");
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

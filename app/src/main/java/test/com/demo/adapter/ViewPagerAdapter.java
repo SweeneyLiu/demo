@@ -1,4 +1,4 @@
-package test.com.viewpagerdemo;
+package test.com.demo.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
@@ -9,10 +9,10 @@ import java.util.List;
 /**
  * Created by liushuwei on 2016/8/30.
  */
-public class MyViewPagerAdapter extends PagerAdapter {
+public class ViewPagerAdapter extends PagerAdapter {
     List<View> arrayList;
 
-    public MyViewPagerAdapter(List<View> arrayList) {
+    public ViewPagerAdapter(List<View> arrayList) {
         this.arrayList = arrayList;//构造方法，参数是我们的页卡，这样比较方便。
     }
 
