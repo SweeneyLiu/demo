@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.volley.toolbox.Volley;
+
 import test.com.demo.R;
 
 
@@ -14,6 +16,7 @@ public class MainActivity extends BaseActivity {
     private Button mSwipeRefreshLayoutButton;
     private Button mViewPagerButton;
     private Button mViewFlipperButton;
+    private Button mVolleyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,14 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        mVolleyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, VolleyActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -60,6 +71,7 @@ public class MainActivity extends BaseActivity {
         mSwipeRefreshLayoutButton = (Button)findViewById(R.id.swiperefreshlayout_button);
         mViewPagerButton = (Button)findViewById(R.id.viewpager_button);
         mViewFlipperButton = (Button)findViewById(R.id.viewflipper_button);
+        mVolleyButton = (Button)findViewById(R.id.volley_button);
     }
 
 }

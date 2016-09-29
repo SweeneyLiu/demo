@@ -36,6 +36,12 @@
                 android:layout_height="wrap_content"
                 android:text="ViewFlipper测试"/>
 
+            <Button
+                android:id="@+id/volley_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Volley测试"/>
+
         </LinearLayout>
     </ScrollView>
 
