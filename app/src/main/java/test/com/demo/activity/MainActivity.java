@@ -5,73 +5,69 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.volley.toolbox.Volley;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import test.com.demo.R;
 
 
 public class MainActivity extends BaseActivity {
 
-    private Button mRecyclerViewButton;
-    private Button mSwipeRefreshLayoutButton;
-    private Button mViewPagerButton;
-    private Button mViewFlipperButton;
-    private Button mVolleyButton;
+    @BindView(R.id.recyclerview_button)
+    Button recyclerviewButton;
+    @BindView(R.id.swiperefreshlayout_button)
+    Button swiperefreshlayoutButton;
+    @BindView(R.id.viewpager_button)
+    Button viewpagerButton;
+    @BindView(R.id.viewflipper_button)
+    Button viewflipperButton;
+    @BindView(R.id.volley_button)
+    Button volleyButton;
+    @BindView(R.id.navigation_drawer_button)
+    Button navigationDrawerButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         initViews();
-        mRecyclerViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mSwipeRefreshLayoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SwipeRefreshLayoutActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mViewPagerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ViewPagerActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mViewFlipperButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ViewFlipperActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mVolleyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, VolleyActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     @Override
     protected void initViews() {
-        mRecyclerViewButton = (Button)findViewById(R.id.recyclerview_button);
-        mSwipeRefreshLayoutButton = (Button)findViewById(R.id.swiperefreshlayout_button);
-        mViewPagerButton = (Button)findViewById(R.id.viewpager_button);
-        mViewFlipperButton = (Button)findViewById(R.id.viewflipper_button);
-        mVolleyButton = (Button)findViewById(R.id.volley_button);
+
     }
 
+    @OnClick({R.id.recyclerview_button, R.id.swiperefreshlayout_button, R.id.viewpager_button, R.id.viewflipper_button, R.id.volley_button, R.id.navigation_drawer_button})
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.recyclerview_button:
+                intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.swiperefreshlayout_button:
+                intent = new Intent(MainActivity.this, SwipeRefreshLayoutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.viewpager_button:
+                intent = new Intent(MainActivity.this, ViewPagerActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.viewflipper_button:
+                intent = new Intent(MainActivity.this, ViewFlipperActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.volley_button:
+                intent = new Intent(MainActivity.this, VolleyActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.navigation_drawer_button:
+                intent = new Intent(MainActivity.this, NavigationDrawerActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 }
