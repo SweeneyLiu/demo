@@ -47,6 +47,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="侧边栏测试"/>
+            <Button
+                android:id="@+id/fresco_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="fresco测试"/>
 
         </LinearLayout>
     </ScrollView>

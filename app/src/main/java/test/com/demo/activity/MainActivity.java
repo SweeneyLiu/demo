@@ -25,6 +25,8 @@ public class MainActivity extends BaseActivity {
     Button volleyButton;
     @BindView(R.id.navigation_drawer_button)
     Button navigationDrawerButton;
+    @BindView(R.id.fresco_button)
+    Button frescoButton;
 
 
     @Override
@@ -40,7 +42,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.recyclerview_button, R.id.swiperefreshlayout_button, R.id.viewpager_button, R.id.viewflipper_button, R.id.volley_button, R.id.navigation_drawer_button})
+    @OnClick({R.id.recyclerview_button, R.id.swiperefreshlayout_button, R.id.viewpager_button, R.id.viewflipper_button, R.id.volley_button, R.id.navigation_drawer_button, R.id.fresco_button})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -68,6 +70,9 @@ public class MainActivity extends BaseActivity {
                 intent = new Intent(MainActivity.this, NavigationDrawerActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.fresco_button:
+                intent = new Intent(MainActivity.this, FrescoActivity.class);
+                startActivity(intent);
         }
     }
 }

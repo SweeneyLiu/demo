@@ -3,6 +3,7 @@ package test.com.demo;
 import android.app.Application;
 import android.content.res.Resources;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -26,6 +27,8 @@ public class DemoApplication extends Application {
         sRefWatcher = LeakCanary.install(this);
         // Normal app init code...
         sRes = getResources();
+        //fresco初始化
+        Fresco.initialize(this);
     }
 
     public static RefWatcher getRefWatcher() {
