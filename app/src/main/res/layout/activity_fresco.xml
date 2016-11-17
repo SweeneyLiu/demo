@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/my_image_view"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+    <!--1.必须设置layout_width和layout_height两个属性，否者无法加载图像-->
+    <!--2.Drawees不支持wrap_content属性-->
+    <!--可以在SimpleDraweeView中添加这些属性
+        fresco:actualImageScaleType="focusCrop"
         fresco:placeholderImage="@drawable/bookicon_defalt"
+        fresco:placeholderImageScaleType="fitCenter"
+        fresco:progressBarImage="@drawable/icon_progress_bar"
+        fresco:progressBarImageScaleType="centerInside"
+        fresco:progressBarAutoRotateInterval="5000"
+        fresco:failureImage="@drawable/icon_failure"
+        fresco:failureImageScaleType="centerInside"
+        fresco:retryImage="@drawable/icon_retry"
+        fresco:retryImageScaleType="centerCrop"
+        fresco:fadeDuration="5000"
+        fresco:backgroundImage="@color/bg_orange"
+        fresco:roundedCornerRadius="30dp"
+        fresco:roundTopLeft="true"
+        fresco:roundTopRight="true"
+        fresco:roundBottomLeft="true"
+        fresco:roundBottomRight="true"
+        fresco:roundingBorderWidth="10dp"
+        fresco:roundingBorderColor="@color/bg_green"
+        fresco:roundWithOverlayColor="@android:color/darker_gray"-->
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/simpleDraweeView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        fresco:progressBarAutoRotateInterval="5000"
         />
 
-</LinearLayout>
+</RelativeLayout>
