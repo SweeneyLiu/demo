@@ -27,6 +27,12 @@ public class MainActivity extends BaseActivity {
     Button navigationDrawerButton;
     @BindView(R.id.fresco_button)
     Button frescoButton;
+    @BindView(R.id.image_loader_button)
+    Button imageLoaderButton;
+    @BindView(R.id.picasso_button)
+    Button picassoButton;
+    @BindView(R.id.glide_button)
+    Button glideButton;
 
 
     @Override
@@ -42,7 +48,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.recyclerview_button, R.id.swiperefreshlayout_button, R.id.viewpager_button, R.id.viewflipper_button, R.id.volley_button, R.id.navigation_drawer_button, R.id.fresco_button})
+    @OnClick({R.id.recyclerview_button, R.id.swiperefreshlayout_button, R.id.viewpager_button
+            , R.id.viewflipper_button, R.id.volley_button, R.id.navigation_drawer_button
+            , R.id.fresco_button, R.id.image_loader_button, R.id.picasso_button, R.id.glide_button})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -72,6 +80,15 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.fresco_button:
                 intent = new Intent(MainActivity.this, FrescoActivity.class);
+                startActivity(intent);
+            case R.id.image_loader_button:
+                intent = new Intent(MainActivity.this, ImageLoaderActivity.class);
+                startActivity(intent);
+            case R.id.picasso_button:
+                intent = new Intent(MainActivity.this, PicassoActivity.class);
+                startActivity(intent);
+            case R.id.glide_button:
+                intent = new Intent(MainActivity.this, GlideActivity.class);
                 startActivity(intent);
         }
     }

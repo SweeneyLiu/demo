@@ -52,6 +52,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="fresco测试"/>
+            <Button
+                android:id="@+id/image_loader_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ImageLoader测试"/>
+            <Button
+                android:id="@+id/picasso_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="picasso测试"/>
+            <Button
+                android:id="@+id/glide_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="glide测试"/>
 
         </LinearLayout>
     </ScrollView>
