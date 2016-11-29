@@ -18,6 +18,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class FrescoActivity extends BaseActivity {
     SimpleDraweeView simpleDraweeView;
 
     private Uri imageUrl = Uri.parse("http://pic1.qiyipic.com/image/20160923/f0/e6/bk_100067950_r_601.jpg");
-
+    private Uri gifUri = Uri.parse("http://p5.qhimg.com/t01d0e0384b952ed7e8.gif");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class FrescoActivity extends BaseActivity {
 
         //第二阶段
         //初始化多张背景图集合
-        List<Drawable> bgs = new ArrayList<Drawable>();
+        /*List<Drawable> bgs = new ArrayList<Drawable>();
         bgs.add(ContextCompat.getDrawable(this,R.drawable.bg_zero));
         bgs.add(ContextCompat.getDrawable(this,R.drawable.bg_one));
         bgs.add(ContextCompat.getDrawable(this,R.drawable.bg_two));
@@ -135,7 +136,7 @@ public class FrescoActivity extends BaseActivity {
                 .setControllerListener(controllerListener)
                 .build();
 
-        simpleDraweeView.setController(controller);
+        simpleDraweeView.setController(controller);*/
 
         //第三阶段
         //初始化圆角圆形参数对象
@@ -236,6 +237,32 @@ public class FrescoActivity extends BaseActivity {
                 .build();
 
         //设置DraweeController
+        simpleDraweeView.setController(controller);*/
+
+        //第五阶段（加载gif动画）
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(gifUri)
+                .setAutoPlayAnimations(true)
+                .build();
+        simpleDraweeView.setController(controller);
+
+        //手动控制
+        /*ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
+
+            @Override
+            public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                super.onFinalImageSet(id, imageInfo, animatable);
+                if (animatable != null) {
+                    // 其他控制逻辑
+                    animatable.start();
+                }
+            }
+        };
+
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(gifUri)
+                .setControllerListener(controllerListener)
+                .build();
         simpleDraweeView.setController(controller);*/
 
     }

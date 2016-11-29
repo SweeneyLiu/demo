@@ -34,7 +34,6 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
-        fresco:progressBarAutoRotateInterval="5000"
         />
 
 </RelativeLayout>

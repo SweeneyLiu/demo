@@ -81,15 +81,19 @@ public class MainActivity extends BaseActivity {
             case R.id.fresco_button:
                 intent = new Intent(MainActivity.this, FrescoActivity.class);
                 startActivity(intent);
+                break;
             case R.id.image_loader_button:
                 intent = new Intent(MainActivity.this, ImageLoaderActivity.class);
                 startActivity(intent);
+                break;
             case R.id.picasso_button:
                 intent = new Intent(MainActivity.this, PicassoActivity.class);
                 startActivity(intent);
+                break;
             case R.id.glide_button:
                 intent = new Intent(MainActivity.this, GlideActivity.class);
                 startActivity(intent);
+                break;
         }
     }
 }
