@@ -32,7 +32,7 @@ public class FrescoActivity extends BaseActivity {
     @BindView(R.id.simpleDraweeView)
     SimpleDraweeView simpleDraweeView;
 
-    private Uri imageUrl = Uri.parse("http://pic1.qiyipic.com/image/20160923/f0/e6/bk_100067950_r_601.jpg");
+//    private Uri imageUrl = Uri.parse("http://pic1.qiyipic.com/image/20160923/f0/e6/bk_100067950_r_601.jpg");
     private Uri gifUri = Uri.parse("http://p5.qhimg.com/t01d0e0384b952ed7e8.gif");
 
     @Override
