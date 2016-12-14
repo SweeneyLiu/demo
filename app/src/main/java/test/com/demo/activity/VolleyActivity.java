@@ -49,18 +49,18 @@ public class VolleyActivity extends BaseActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Toast.makeText(VolleyActivity.this,"请求成功",Toast.LENGTH_SHORT);
+                Toast.makeText(VolleyActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(VolleyActivity.this,"请求失败",Toast.LENGTH_SHORT);
+                Toast.makeText(VolleyActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                Map<String,String> map = new HashMap<String,String>();
+                Map<String,String> map = new HashMap<>();
                 String city = "温州";
                 try {
                     city = new String(city.getBytes(), "UTF-8");
@@ -74,6 +74,11 @@ public class VolleyActivity extends BaseActivity {
         };
 
         mRequestQueue.add(stringRequest);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
