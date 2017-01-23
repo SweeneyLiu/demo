@@ -9,8 +9,10 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import test.com.demo.R;
 
 public class RxJavaActivity extends AppCompatActivity {
@@ -40,11 +42,23 @@ public class RxJavaActivity extends AppCompatActivity {
                 e.onNext(3);
                 Log.d(TAG, "onNext(3)");
             }
+        }).subscribeOn(Schedulers.newThread()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).doOnNext(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.d(TAG, "doOnNext---main---Consumer thread is : " + Thread.currentThread().getName());
+                Log.d(TAG, String.valueOf(integer));
+            }
+        }).observeOn(Schedulers.io()).doOnNext(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.d(TAG, "doOnNext---io1---Consumer thread is : " + Thread.currentThread().getName());
+                Log.d(TAG, String.valueOf(integer));
+            }
         }).subscribe(new Consumer<Integer>() {
 
             @Override
             public void accept(Integer integer) throws Exception {
-                Log.d(TAG, "Consumer thread is : " + Thread.currentThread().getName());
+                Log.d(TAG, "doOnNext---io2---Consumer thread is : " + Thread.currentThread().getName());
                 Log.d(TAG, String.valueOf(integer));
             }
         });
