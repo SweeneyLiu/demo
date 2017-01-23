@@ -33,6 +33,8 @@ public class MainActivity extends BaseActivity {
     Button picassoButton;
     @BindView(R.id.glide_button)
     Button glideButton;
+    @BindView(R.id.RxJava_button)
+    Button RxJavaButton;
 
 
     @Override
@@ -50,7 +52,8 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.recyclerview_button, R.id.swiperefreshlayout_button, R.id.viewpager_button
             , R.id.viewflipper_button, R.id.volley_button, R.id.navigation_drawer_button
-            , R.id.fresco_button, R.id.image_loader_button, R.id.picasso_button, R.id.glide_button})
+            , R.id.fresco_button, R.id.image_loader_button, R.id.picasso_button, R.id.glide_button
+            ,R.id.RxJava_button})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -92,6 +95,10 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.glide_button:
                 intent = new Intent(MainActivity.this, GlideActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.RxJava_button:
+                intent = new Intent(MainActivity.this, RxJavaActivity.class);
                 startActivity(intent);
                 break;
         }

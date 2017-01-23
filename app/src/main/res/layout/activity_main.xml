@@ -67,6 +67,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="glide测试"/>
+            <Button
+                android:id="@+id/RxJava_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RxJava测试"/>
 
         </LinearLayout>
     </ScrollView>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="test.com.demo">
+          package="test.com.demo">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".DemoApplication"
@@ -14,22 +14,24 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RecyclerViewActivity" />
-        <activity android:name=".activity.StaggeredGridViewLayoutActivity" />
-        <activity android:name=".activity.SwipeRefreshLayoutActivity" />
-        <activity android:name=".activity.ViewPagerActivity" />
-        <activity android:name=".activity.ViewFlipperActivity" />
-        <activity android:name=".activity.VolleyActivity" />
-        <activity android:name=".activity.NavigationDrawerActivity" />
-        <activity android:name=".activity.FrescoActivity" />
-        <activity android:name=".activity.ImageLoaderActivity" />
-        <activity android:name=".activity.PicassoActivity" />
-        <activity android:name=".activity.GlideActivity"></activity>
+        <activity android:name=".activity.RecyclerViewActivity"/>
+        <activity android:name=".activity.StaggeredGridViewLayoutActivity"/>
+        <activity android:name=".activity.SwipeRefreshLayoutActivity"/>
+        <activity android:name=".activity.ViewPagerActivity"/>
+        <activity android:name=".activity.ViewFlipperActivity"/>
+        <activity android:name=".activity.VolleyActivity"/>
+        <activity android:name=".activity.NavigationDrawerActivity"/>
+        <activity android:name=".activity.FrescoActivity"/>
+        <activity android:name=".activity.ImageLoaderActivity"/>
+        <activity android:name=".activity.PicassoActivity"/>
+        <activity android:name=".activity.GlideActivity"/>
+        <activity android:name=".activity.RxJavaActivity">
+        </activity>
     </application>
 
 </manifest>
