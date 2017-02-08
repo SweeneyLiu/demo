@@ -25,7 +25,8 @@
         <activity android:name=".activity.ViewPagerActivity"/>
         <activity android:name=".activity.ViewFlipperActivity"/>
         <activity android:name=".activity.VolleyActivity"/>
-        <activity android:name=".activity.NavigationDrawerActivity"/>
+        <activity android:name=".activity.NavigationDrawerActivity"
+            android:theme="@style/NDTheme"/>
         <activity android:name=".activity.FrescoActivity"/>
         <activity android:name=".activity.ImageLoaderActivity"/>
         <activity android:name=".activity.PicassoActivity"/>

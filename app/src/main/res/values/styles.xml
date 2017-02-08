@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--Toolbar颜色-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <!--状态栏颜色-->
@@ -11,6 +11,14 @@
         <item name="android:listDivider">@drawable/divider_bg</item>
         <!--菜单键样式-->
         <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>
+    </style>
+
+    <style name="NDTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--Toolbar颜色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.DrawerArrowToggle" parent="Base.Widget.AppCompat.DrawerArrowToggle">
