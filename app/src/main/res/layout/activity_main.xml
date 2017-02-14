@@ -46,7 +46,7 @@
                 android:id="@+id/navigation_drawer_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="侧边栏测试"/>
+                android:text="DrawerLayout测试"/>
             <Button
                 android:id="@+id/fresco_button"
                 android:layout_width="match_parent"

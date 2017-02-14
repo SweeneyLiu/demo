@@ -1,10 +1,15 @@
 package test.com.demo.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -18,11 +23,20 @@ import test.com.demo.R;
 public class RxJavaActivity extends AppCompatActivity {
 
     private static final String TAG = "RxJavaActivity";
+    @BindView(R.id.button1)
+    Button button1;
+    @BindView(R.id.button2)
+    Button button2;
+    @BindView(R.id.button3)
+    Button button3;
+    @BindView(R.id.button4)
+    Button button4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_java);
+        ButterKnife.bind(this);
 //        testObserver();
         testConsume();
     }
@@ -88,6 +102,7 @@ public class RxJavaActivity extends AppCompatActivity {
             }
         }).subscribe(new Observer<Integer>() {
             private Disposable disposable;
+
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");
@@ -97,7 +112,7 @@ public class RxJavaActivity extends AppCompatActivity {
             @Override
             public void onNext(Integer value) {
                 Log.d(TAG, "onNext");
-                if(value == 1){
+                if (value == 1) {
 //                    disposable.dispose();
                     Log.d(TAG, "dispose");
                 }
@@ -145,5 +160,24 @@ public class RxJavaActivity extends AppCompatActivity {
         //建立关联
         observable.subscribe(observer);*/
 
+    }
+
+    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button1:
+                ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle("This is ProgressDialog");
+                progressDialog.setMessage("loading......");
+                progressDialog.setCancelable(true);//可以通过back键取消掉
+                progressDialog.show();
+                break;
+            case R.id.button2:
+                break;
+            case R.id.button3:
+                break;
+            case R.id.button4:
+                break;
+        }
     }
 }
