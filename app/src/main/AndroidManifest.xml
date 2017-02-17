@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:name=".DemoApplication"
@@ -25,13 +26,16 @@
         <activity android:name=".activity.ViewPagerActivity"/>
         <activity android:name=".activity.ViewFlipperActivity"/>
         <activity android:name=".activity.VolleyActivity"/>
-        <activity android:name=".activity.NavigationDrawerActivity"
+        <activity
+            android:name=".activity.NavigationDrawerActivity"
             android:theme="@style/NDTheme"/>
         <activity android:name=".activity.FrescoActivity"/>
         <activity android:name=".activity.ImageLoaderActivity"/>
         <activity android:name=".activity.PicassoActivity"/>
         <activity android:name=".activity.GlideActivity"/>
         <activity android:name=".activity.RxJavaActivity">
+        </activity>
+        <activity android:name=".activity.PermissionActivity">
         </activity>
     </application>
 
