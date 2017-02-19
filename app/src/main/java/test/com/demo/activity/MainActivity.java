@@ -37,6 +37,8 @@ public class MainActivity extends BaseActivity {
     Button RxJavaButton;
     @BindView(R.id.Permiss_button)
     Button PermissButton;
+    @BindView(R.id.baidu_map_button)
+    Button baiduMapButton;
 
 
     @Override
@@ -55,7 +57,7 @@ public class MainActivity extends BaseActivity {
     @OnClick({R.id.recyclerview_button, R.id.swiperefreshlayout_button, R.id.viewpager_button
             , R.id.viewflipper_button, R.id.volley_button, R.id.navigation_drawer_button
             , R.id.fresco_button, R.id.image_loader_button, R.id.picasso_button, R.id.glide_button
-            , R.id.RxJava_button, R.id.Permiss_button})
+            , R.id.RxJava_button, R.id.Permiss_button, R.id.baidu_map_button})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -105,6 +107,10 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.Permiss_button:
                 intent = new Intent(MainActivity.this, PermissionActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.baidu_map_button:
+                intent = new Intent(MainActivity.this, BaiDuMapActivity.class);
                 startActivity(intent);
                 break;
         }
