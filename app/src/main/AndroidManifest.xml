@@ -54,7 +54,12 @@
             android:enabled="true"
             android:process=":remote"></service>
 
-        <activity android:name=".activity.MaterialDesignActivity"></activity>
+        <activity android:name=".activity.MaterialDesignActivity"
+                  android:theme="@style/NDTheme"
+                  android:label="Fruits">
+        </activity>
+        <activity android:name=".activity.FruitActivity"
+                  android:theme="@style/FruitActivityTheme"/>
     </application>
 
 </manifest>
