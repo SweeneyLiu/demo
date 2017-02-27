@@ -14,6 +14,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.LocatorImpl;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -47,6 +48,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import test.com.demo.R;
+import test.com.demo.utils.Tools;
 
 public class RxJavaActivity extends AppCompatActivity {
 
@@ -201,20 +203,58 @@ public class RxJavaActivity extends AppCompatActivity {
                 progressDialog.show();
                 break;
             case R.id.button2:
-                getSystemAllFallBackFonts();
+                getSystemDefaultEnglishFont();
+//                getSystemAllFallBackFonts();
                 break;
             case R.id.button3:
-                getSystemEnglishFonts();
+//                getSystemEnglishFonts();
+                getSystemDefaultFont();
                 break;
             case R.id.button4:
 //                test();
-                test1();
+//                test1();
+//                testList();
+                getSystemEnglishFont();
                 break;
         }
     }
 
-    private void test1() {
-        String path = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "fonts.xml";
+    /*private void testList() {
+        List<String> list = new ArrayList<>();
+        String systemFontsPath = Environment.getRootDirectory().getPath() + File.separator + "fonts";
+        File file=new File(systemFontsPath);
+        if(file!=null){
+            if(file.isDirectory()){
+                File[] fileNames=file.listFiles();
+                if(fileNames!=null){
+                    for (int i = 0; i < fileNames.length; i++) {
+                        //递归调用
+                        long blockSize = getFileSize(fileNames[i]);
+                        if(blockSize > 1048576){
+                            list.add(fileNames[i].getPath());
+                        }
+                    }
+                }
+            }
+        }
+
+        for(int j = 0;j<list.size();j++){
+            Log.i(TAG, "testList: 可以字体列表--"+list.get(j));
+        }
+
+    }*/
+
+
+    /*private void test1() {
+        List<String> list = new ArrayList<>();
+        *//*String path = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "fonts.xml";
+        String path2 = "mnt" + File.separator + "sdcard" + File.separator + "Download" + File.separator + "mfonts.xml";
+        String path3 = Environment.getExternalStorageDirectory() + File.separator + "sdcard" + File.separator + "Download" + File.separator + "nocnfonts.xml";*//*
+
+        String path1 = Environment.getExternalStorageDirectory().getPath() + File.separator + "fonts7.0.xml";
+        String path2 = Environment.getExternalStorageDirectory().getPath() + File.separator + "mfonts7.0.xml";
+        String path3 = Environment.getExternalStorageDirectory().getPath() + File.separator + "nocnfonts7.0.xml";
+
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setValidating(false);
         DocumentBuilder db = null;
@@ -226,7 +266,7 @@ public class RxJavaActivity extends AppCompatActivity {
 
         Document doc = null;
         try {
-            doc = db.parse(new FileInputStream(new File(path)));
+            doc = db.parse(new FileInputStream(new File(path3)));
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -248,13 +288,29 @@ public class RxJavaActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if (nodeList == null) {
-
-        }
-        for (int i = 0; i < nodeList.getLength(); i++) {
-
-            System.out.print(nodeList.item(i).getChildNodes().item(0).getTextContent() + " ");
-
+        if (nodeList.getLength()==0) {
+            String expression2 = "familyset/family[not(@lang)]/font[@weight=\"400\"][@style=\"normal\"]";
+            NodeList nodeList2 = null;
+            try {
+                nodeList2 = (NodeList) xpath.evaluate(expression2, doc, XPathConstants.NODESET);
+            } catch (XPathExpressionException e) {
+                e.printStackTrace();
+            }
+                for (int j = 0; j < nodeList2.getLength(); j++) {
+                    list.add(nodeList2.item(j).getTextContent());
+                }
+        } else {
+            int length = nodeList.getLength();
+            if(length == 1){
+                list.add(nodeList.item(0).getChildNodes().item(0).getTextContent());
+            }else{
+                for (int i = 0; i < nodeList.getLength(); i++) {
+                    NamedNodeMap namedNodeMap = nodeList.item(i).getAttributes();
+                    if((namedNodeMap.getNamedItem("weight").getNodeValue().equals("400"))&&(namedNodeMap.getNamedItem("style").getNodeValue().equals("normal"))){
+                        list.add(nodeList.item(i).getChildNodes().item(0).getTextContent());
+                    }
+                    }
+                }
         }
     }
     private void test() {
@@ -279,9 +335,9 @@ public class RxJavaActivity extends AppCompatActivity {
         }
     }
 
-    /*
+    *//*
      * 递归遍历并打印所有的ElementNode(包括节点的属性和文本节点的有效内容),按一般的xml样式展示出来(空格来表示层次)
-     */
+     *//*
     public void listAllChildNodes(Node node, int level) {
         if (node.getNodeType() == Node.ELEMENT_NODE) {
 
@@ -351,10 +407,10 @@ public class RxJavaActivity extends AppCompatActivity {
     }
 
 
-    /**
+    *//**
      * 遍历获取系统所有字体
      * @return
-     */
+     *//*
     public static void getSystemEnglishFonts() {
 
         String path = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "fonts.xml";
@@ -365,10 +421,10 @@ public class RxJavaActivity extends AppCompatActivity {
     }
 
 
-    /**
+    *//**
      * 遍历获取系统所有字体
      * @return
-     */
+     *//*
     public static void getSystemAllFallBackFonts() {
 
         String fallBackXMLPath = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "fallback_fonts.xml";
@@ -541,11 +597,11 @@ public class RxJavaActivity extends AppCompatActivity {
         return englishFont;
     }
 
-    /**
+    *//**
      * 获得系统字体XML的路径
      *
      * @return
-     */
+     *//*
     public static String getFontXMLStr(String path) {
 
         String templateContent = null;
@@ -569,6 +625,278 @@ public class RxJavaActivity extends AppCompatActivity {
         }
 
         return templateContent;
+    }
+
+    *//**
+     * 获取指定文件大小
+     * @param file
+     * @return
+     * @throws Exception
+     *//*
+    private static long getFileSize(File file)
+    {
+        long size = 0;
+        if (file.exists()){
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                size = fis.available();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return size;
+    }*/
+
+
+    /**
+     * 获得系统默认英文字体
+     *
+     * @return
+     */
+    public static String getSystemDefaultEnglishFont() {
+        String path = "";
+        String systemFontFile = Environment.getRootDirectory().getPath() + File.separator + "fonts";
+        String englishFontPath = systemFontFile + File.separator + "DroidSans.ttf";//英文字体路径
+       /* if (Tools.isFileExists(englishFontPath)) {
+            path = englishFontPath;
+            return path;
+        }
+        englishFontPath = systemFontFile + File.separator + "Roboto-Regular.ttf";
+        if (Tools.isFileExists(englishFontPath)) {
+            path = englishFontPath;
+            return path;
+        }*/
+        //获取系统默认的字体
+        path = getSystemEnglishFont();
+        return path;
+    }
+
+
+    /**
+     * 获取系统默认字体
+     * @return
+     */
+    public static String[] getSystemDefaultFont() {
+        String[] chineseFontsPath = null;
+        String fallBackXMLPath = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "fallback_fonts.xml";
+//        String fontsXMLath = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "fonts.xml";
+        String fontsXMLath = File.separator + "mnt" + File.separator + "sdcard"  + File.separator + "Download"  + File.separator + "mfonts7.xml";
+        String fontsPath = Environment.getRootDirectory().getPath() + File.separator + "fonts";
+
+        if(Tools.isFileExists(fallBackXMLPath)){
+            List<String> allFallBackFontsList = parseXMLWithPull(getFontXMLStr(fallBackXMLPath));
+            List<String> chineseFontsPathList = new ArrayList<>();
+            for (int i = 0; i < allFallBackFontsList.size(); i++) {
+                String path = fontsPath + File.separator + allFallBackFontsList.get(i);
+                long blockSize = getFileSize(new File(path));
+                if(blockSize > 1048576){
+                    chineseFontsPathList.add(path);
+                }
+            }
+            chineseFontsPath = chineseFontsPathList.toArray(new String[chineseFontsPathList.size()]);
+        }else if(Tools.isFileExists(fontsXMLath)){
+            Log.i(TAG, "getSystemDefaultFont: begin--"+System.currentTimeMillis());
+            List<String> allFontsList = parseXMLWithDom(fontsXMLath);
+            Log.i(TAG, "getSystemDefaultFont: end--"+System.currentTimeMillis());
+            List<String> chineseFontsPathList = new ArrayList<>();
+            for (int i = 0; i < allFontsList.size(); i++) {
+                String path = fontsPath + File.separator + allFontsList.get(i);
+                long blockSize = getFileSize(new File(path));
+                if(blockSize > 1048576){
+                    chineseFontsPathList.add(path);
+                }
+            }
+            chineseFontsPath = chineseFontsPathList.toArray(new String[chineseFontsPathList.size()]);
+        }
+
+        return chineseFontsPath;
+    }
+
+
+    /**
+     * 获取系统使用的英文字体
+     * @return
+     */
+    public static String getSystemEnglishFont() {
+        String fontFile = Environment.getRootDirectory().getPath() + File.separator + "fonts";
+        File file = new File(fontFile);
+        String systemFontPath = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "system_fonts.xml";
+        String fontsPath = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "fonts.xml";
+        String path = "";
+        if(Tools.isFileExists(systemFontPath)){
+            path = new File(file,parseSystemFontWithPull(getFontXMLStr(systemFontPath))).getPath();
+        }else if(Tools.isFileExists(fontsPath)){
+            path = new File(file,parseEnglishFontsXMLWithPull(getFontXMLStr(fontsPath))).getPath();
+        }
+
+        return path;
+    }
+
+
+    /**
+     * 获取字体XML文件的字符串
+     * @param path
+     * @return
+     */
+    public static String getFontXMLStr(String path) {
+
+        String content = null;
+        try {
+            File file = new File(path);
+            String encoding = "utf-8";
+            if (file.isFile() && file.exists()) { //判断文件是否存在
+                InputStreamReader read = new InputStreamReader(new FileInputStream(file), encoding);//考虑到编码格式
+                BufferedReader bufferedReader = new BufferedReader(read);
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    response.append(line);
+                }
+                content = response.toString();
+                read.close();
+                bufferedReader.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return content;
+    }
+
+    /**
+     * 用PULL方式解析XML文件
+     * @param xmlData
+     * @return
+     */
+    private static String parseSystemFontWithPull(String xmlData) {
+        String systemEnglishFont = "";
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xmlPullParser = factory.newPullParser();
+            xmlPullParser.setInput(new StringReader(xmlData));
+            int eventType = xmlPullParser.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                String nodeName = xmlPullParser.getName();
+                switch (eventType) {
+                    //文档开始
+                    case XmlPullParser.START_DOCUMENT:
+                        break;
+                    // 开始解析某个结点
+                    case XmlPullParser.START_TAG: {
+                        if("file".equals(nodeName)){
+                            systemEnglishFont = xmlPullParser.nextText();
+                            return systemEnglishFont;
+                        }
+                        break;
+                    }
+                    // 完成解析某个结点
+                    case XmlPullParser.END_TAG: {
+
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                eventType = xmlPullParser.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return systemEnglishFont;
+    }
+
+    /**
+     * 用PULL方式解析出XML文件的英文字体
+     * @param xmlData
+     * @return
+     */
+    private static String parseEnglishFontsXMLWithPull(String xmlData) {
+        String englishFont = "";
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xmlPullParser = factory.newPullParser();
+            xmlPullParser.setInput(new StringReader(xmlData));
+            int eventType = xmlPullParser.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                String nodeName = xmlPullParser.getName();
+                switch (eventType) {
+                    //文档开始
+                    case XmlPullParser.START_DOCUMENT:
+                        break;
+                    // 开始解析某个结点
+                    case XmlPullParser.START_TAG: {
+                        if("font".equals(nodeName)){
+                            if("400".equals(xmlPullParser.getAttributeValue(0))){
+                                if("normal".equals(xmlPullParser.getAttributeValue(1))){
+                                    englishFont = xmlPullParser.nextText();
+                                    return englishFont;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                    // 完成解析某个结点
+                    case XmlPullParser.END_TAG: {
+
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                eventType = xmlPullParser.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return englishFont;
+    }
+
+
+    /**
+     * 通过PULL方式解析XML
+     * @param xmlData
+     * @return
+     */
+    private static List<String> parseXMLWithPull(String xmlData) {
+        List<String> list = null;
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xmlPullParser = factory.newPullParser();
+            xmlPullParser.setInput(new StringReader(xmlData));
+            int eventType = xmlPullParser.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                String nodeName = xmlPullParser.getName();
+                switch (eventType) {
+                    //文档开始
+                    case XmlPullParser.START_DOCUMENT:
+                        list = new ArrayList<>();
+                        break;
+                    // 开始解析某个结点
+                    case XmlPullParser.START_TAG: {
+                        if("file".equals(nodeName)){
+                            list.add(xmlPullParser.nextText());
+                        }
+                        break;
+                    }
+                    // 完成解析某个结点
+                    case XmlPullParser.END_TAG: {
+
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                eventType = xmlPullParser.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     /**
@@ -595,5 +923,73 @@ public class RxJavaActivity extends AppCompatActivity {
         }
         return size;
     }
+
+    /**
+     * 通过DOM的方式解析XML
+     * @param path
+     * @return
+     */
+    private static List<String> parseXMLWithDom(String path) {
+        List<String> list = new ArrayList<>();
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setValidating(false);
+        DocumentBuilder db = null;
+        try {
+            db = dbf.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        Document doc = null;
+        try {
+            doc = db.parse(new FileInputStream(new File(path)));
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        XPathFactory factory = XPathFactory.newInstance();
+
+        XPath xpath = factory.newXPath();
+
+        String expression;
+        NodeList nodeList = null;
+
+        expression = "familyset/family[@lang=\"zh-Hans\"]/font";
+
+        try {
+            nodeList = (NodeList) xpath.evaluate(expression, doc, XPathConstants.NODESET);
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+
+        if (nodeList.getLength()==0) {
+            String expression2 = "familyset/family[not(@lang)]/font[@weight=\"400\"][@style=\"normal\"]";
+            NodeList nodeList2 = null;
+            try {
+                nodeList2 = (NodeList) xpath.evaluate(expression2, doc, XPathConstants.NODESET);
+            } catch (XPathExpressionException e) {
+                e.printStackTrace();
+            }
+            for (int j = 0; j < nodeList2.getLength(); j++) {
+                list.add(nodeList2.item(j).getTextContent());
+            }
+        } else {
+            int length = nodeList.getLength();
+            if(length == 1){
+                list.add(nodeList.item(0).getChildNodes().item(0).getTextContent());
+            }else{
+                for (int i = 0; i < nodeList.getLength(); i++) {
+                    NamedNodeMap namedNodeMap = nodeList.item(i).getAttributes();
+                    if((namedNodeMap.getNamedItem("weight").getNodeValue().equals("400"))&&(namedNodeMap.getNamedItem("style").getNodeValue().equals("normal"))){
+                        list.add(nodeList.item(i).getChildNodes().item(0).getTextContent());
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
 
 }
