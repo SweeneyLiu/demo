@@ -45,6 +45,8 @@ public class MainActivity extends BaseActivity {
     Button downloadButton;
     @BindView(R.id.notification_button)
     Button notificationButton;
+    @BindView(R.id.dynamic_add_button)
+    Button dynamicAddButton;
 
 
     @Override
@@ -63,7 +65,8 @@ public class MainActivity extends BaseActivity {
     @OnClick({R.id.recyclerview_button, R.id.swiperefreshlayout_button, R.id.viewpager_button
             , R.id.viewflipper_button, R.id.volley_button, R.id.navigation_drawer_button
             , R.id.fresco_button, R.id.image_loader_button, R.id.picasso_button, R.id.glide_button
-            , R.id.RxJava_button, R.id.permiss_button, R.id.baidu_map_button, R.id.material_design_button, R.id.download_button, R.id.notification_button})
+            , R.id.RxJava_button, R.id.permiss_button, R.id.baidu_map_button, R.id.material_design_button
+            , R.id.download_button, R.id.notification_button, R.id.dynamic_add_button})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -129,6 +132,10 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.notification_button:
                 intent = new Intent(MainActivity.this, NotificationActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.dynamic_add_button:
+                intent = new Intent(MainActivity.this, DynamicAddViewActivity.class);
                 startActivity(intent);
                 break;
         }

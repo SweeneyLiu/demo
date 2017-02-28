@@ -97,6 +97,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Notification测试"/>
+            <Button
+                android:id="@+id/dynamic_add_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="动态增加View测试"/>
 
         </LinearLayout>
     </ScrollView>

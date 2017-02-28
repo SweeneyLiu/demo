@@ -683,9 +683,12 @@ public class RxJavaActivity extends AppCompatActivity {
      */
     public static String[] getSystemDefaultFont() {
         String[] chineseFontsPath = null;
-        String fallBackXMLPath = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "fallback_fonts.xml";
+        String fallBackXMLPath = Environment.getRootDirectory().getPath() + File.separator + "etc1" + File.separator + "fallback_fonts.xml";
 //        String fontsXMLath = Environment.getRootDirectory().getPath() + File.separator + "etc" + File.separator + "fonts.xml";
-        String fontsXMLath = File.separator + "mnt" + File.separator + "sdcard"  + File.separator + "Download"  + File.separator + "mfonts7.xml";
+//        String fontsXMLath = File.separator + "mnt" + File.separator + "sdcard"  + File.separator + "Download"  + File.separator + "mfonts7.xml";
+        String fontsXMLath = Environment.getExternalStorageDirectory().getPath() + File.separator + "fonts7.0.xml";
+//        String fontsXMLath = Environment.getExternalStorageDirectory().getPath() + File.separator + "mfonts7.0.xml";
+//        String fontsXMLath = Environment.getExternalStorageDirectory().getPath() + File.separator + "nocnfonts7.0.xml";
         String fontsPath = Environment.getRootDirectory().getPath() + File.separator + "fonts";
 
         if(Tools.isFileExists(fallBackXMLPath)){
@@ -701,7 +704,8 @@ public class RxJavaActivity extends AppCompatActivity {
             chineseFontsPath = chineseFontsPathList.toArray(new String[chineseFontsPathList.size()]);
         }else if(Tools.isFileExists(fontsXMLath)){
             Log.i(TAG, "getSystemDefaultFont: begin--"+System.currentTimeMillis());
-            List<String> allFontsList = parseXMLWithDom(fontsXMLath);
+//            List<String> allFontsList = parseXMLWithDom(fontsXMLath);
+            List<String> allFontsList = parseFontsXMLWithPull(getFontXMLStr(fontsXMLath));
             Log.i(TAG, "getSystemDefaultFont: end--"+System.currentTimeMillis());
             List<String> chineseFontsPathList = new ArrayList<>();
             for (int i = 0; i < allFontsList.size(); i++) {
@@ -987,6 +991,81 @@ public class RxJavaActivity extends AppCompatActivity {
                     }
                 }
             }
+        }
+        return list;
+    }
+
+    private static List<String> parseFontsXMLWithPull(String xmlData) {
+        List<String> list = null;
+        String chineseFont = "";
+        boolean isRightFont = false;
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xmlPullParser = factory.newPullParser();
+            xmlPullParser.setInput(new StringReader(xmlData));
+            int eventType = xmlPullParser.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                String nodeName = xmlPullParser.getName();
+                switch (eventType) {
+                    //文档开始
+                    case XmlPullParser.START_DOCUMENT:
+                        list = new ArrayList<>();
+                        break;
+                    // 开始解析某个结点
+                    case XmlPullParser.START_TAG: {
+
+                        if("family".equals(nodeName)){
+                            int count = xmlPullParser.getAttributeCount();
+                            for (int i = 0; i < count; i++) {
+                                String name = xmlPullParser.getAttributeName(i);
+                                String value = xmlPullParser.getAttributeValue(i);
+                                if ((name.equals("lang"))&&("zh-Hans".equals(value))) {
+                                    isRightFont = true;
+                                    break;
+                                }
+                            }
+
+                        }else if("font".equals(nodeName)){
+
+                            if (isRightFont) {
+                                boolean isRightWeight = false;
+                                boolean isRightStyle = false;
+                                int count = xmlPullParser.getAttributeCount();
+                                for (int i = 0; i < count; i++) {
+                                    String name = xmlPullParser.getAttributeName(i);
+                                    String value = xmlPullParser.getAttributeValue(i);
+                                    if("weight".equals(name)){
+                                        if("400".equals(value)){
+                                            isRightWeight = true;
+                                        }
+                                    }else if("style".equals(name)){
+                                        if("normal".equals(value)){
+                                            isRightStyle = true;
+                                        }
+                                    }
+                                }
+                                if((isRightWeight)&&(isRightStyle)){
+                                    chineseFont = xmlPullParser.nextText();
+                                }
+                            }else{
+
+                            }
+
+                        }
+                        break;
+                    }
+                    // 完成解析某个结点
+                    case XmlPullParser.END_TAG: {
+                        isRightFont = false;
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                eventType = xmlPullParser.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }
