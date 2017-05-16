@@ -3,6 +3,7 @@ package test.com.demo.activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import test.com.demo.R;
 public class MainActivity extends ListActivity {
 
 
+    private static final String TAG = "MainActivity";
+    
     public static final String[] testOptions = { "RecyclerView测试", "SwipeRefreshLayout测试", "ViewPager测试", "ViewFlipper测试", "Volley测试",
             "DrawerLayout测试", "fresco测试", "ImageLoader测试", "picasso测试", "glide测试", "RxJava测试", "Permission测试", "百度地图测试",
             "MaterialDesign测试", "下载测试", "Notification测试", "动态增加View测试"};
@@ -88,6 +91,12 @@ public class MainActivity extends ListActivity {
         }
 
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i(TAG, "onActivityResult: ");
     }
 
     /*@BindView(R.id.recyclerview_button)
