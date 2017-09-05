@@ -1,6 +1,7 @@
 package test.com.demo.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,39 +16,43 @@ import test.com.demo.R;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DemoViewHolder>{
 
-    protected ArrayList<String> mDataList;
+    private static final String TAG = "RecyclerViewAdapter";
+    ArrayList<String> mDataList;
     private OnItemClickListener mOnItemClickListener;
 
     public RecyclerViewAdapter(ArrayList<String> arrayList) {
         this.mDataList = arrayList;
     }
 
+    static class DemoViewHolder extends RecyclerView.ViewHolder {
+
+        TextView mTextView;
+
+        DemoViewHolder(View itemView) {
+            super(itemView);
+            mTextView = (TextView) itemView.findViewById(R.id.tv);
+        }
+    }
+
+
     @Override
     public DemoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview,parent,false);
         DemoViewHolder demoViewHolder = new DemoViewHolder(view);
+        Log.i(TAG, "onCreateViewHolder: ");
         return demoViewHolder;
     }
 
     @Override
     public void onBindViewHolder(DemoViewHolder holder, int position) {
         holder.mTextView.setText(mDataList.get(position));
+        Log.i(TAG, "onBindViewHolder: ");
     }
 
     @Override
     public int getItemCount() {
         return mDataList.size();
     }
-
-    public static class DemoViewHolder extends RecyclerView.ViewHolder{
-
-        public TextView mTextView;
-        public DemoViewHolder(View itemView) {
-            super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.tv);
-        }
-    }
-
 
     /**
      * 点击事件的接口
